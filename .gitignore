@@ -6,3 +6,13 @@
 *.js~
 mathjax-b
 HTMLPurifier
+
+# Claude AI config
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+README.md  # only if you don't want this committed either
+
+# IMATHAS
+config.php
+loginpage.php

@@ -170,7 +170,7 @@ if (isset($_GET['launch'])) {
 		$aid = $_SESSION['ltiitemid'];
 		$stm = $DBH->prepare('SELECT courseid,ver FROM imas_assessments WHERE id=:aid');
 		$stm->execute(array(':aid'=>$aid));
-		list($cid,$aver) = $stm->fetch(PDO::FETCH_NUM);
+		list($cid,$aver) = $stm->fetch(PDO::FETCH_NUM) ?: [false,null];
 		if ($cid===false) {
 			$diaginfo = "(Debug info: 1-$aid)";
 			reporterror(_("This assignment does not appear to exist anymore.")." $diaginfo");
@@ -310,6 +310,14 @@ if (isset($_GET['launch'])) {
                         $userid= $tmpuserid;
 					} else {
 						$infoerr = 'Existing username/password provided are not valid.';
+						if (isset($CFG['cloudwatch_loginlog'])) {
+							require_once __DIR__.'/includes/CloudWatchLogger.php';
+							addLoginLog('login_failure', $tmpuserid, [
+								'reason' => 'bad_pw',
+								'via' => 'LTI1.1',
+								'ltiuser' => [$ltiuserid, $_SESSION['lti_key']]
+							]);
+						}
 						unset($tmpuserid);
 					}
 				}
@@ -376,7 +384,7 @@ if (isset($_GET['launch'])) {
 
 					$reqdata = array('added'=>$now, 'actions'=>array(array('on'=>$now, 'status'=>11, 'via'=>'LTI')));
 					$stm = $DBH->prepare("INSERT INTO imas_instr_acct_reqs (userid,status,reqdate,reqdata) VALUES (?,11,?,?)");
-					$stm->execute(array($newuserid, $now, json_encode($reqdata)));
+					$stm->execute(array($userid, $now, json_encode($reqdata)));
 				}
 			}
 			$stm = $DBH->prepare('UPDATE imas_ltiusers SET userid=:userid WHERE id=:localltiuser');
@@ -794,7 +802,7 @@ if (isset($_GET['launch'])) {
 
 					$reqdata = array('added'=>$now, 'actions'=>array(array('on'=>$now, 'status'=>11, 'via'=>'LTI')));
 					$stm = $DBH->prepare("INSERT INTO imas_instr_acct_reqs (userid,status,reqdate,reqdata) VALUES (?,11,?,?)");
-					$stm->execute(array($newuserid, $now, json_encode($reqdata)));
+					$stm->execute(array($userid, $now, json_encode($reqdata)));
 				}
 			}
 			$stm = $DBH->prepare('UPDATE imas_ltiusers SET userid=:userid WHERE id=:localltiuser');
@@ -891,7 +899,7 @@ if ($stm->rowCount()==0) {
 				}
 				$stm = $DBH->prepare('SELECT jsondata,UIver FROM imas_courses WHERE id=:aidsourcecid');
 				$stm->execute(array(':aidsourcecid'=>$aidsourcecid));
-				list($aidsourcejsondata,$sourceUIver) = $stm->fetch(PDO::FETCH_NUM);
+				list($aidsourcejsondata,$sourceUIver) = $stm->fetch(PDO::FETCH_NUM) ?: [null,null];
                 if ($aidsourcejsondata!==null) {
 				    $aidsourcejsondata = json_decode($aidsourcejsondata, true);
                 }
@@ -1727,6 +1735,15 @@ $_SESSION['ltiuserid'] = $SESS['ltiuserid'];
 $_SESSION['userid'] = $userid;
 $_SESSION['time'] = $now;
 $_SESSION['started'] = $now;
+if ($createnewsession) {
+	if (isset($CFG['cloudwatch_loginlog'])) {
+		require_once __DIR__.'/includes/CloudWatchLogger.php';
+		addLoginLog('login_success', $userid, [
+			'via' => 'LTI1.1',
+			'ltiuser' => [$_SESSION['ltiuserid'], $_SESSION['lti_key']]
+		]);
+	}
+}
 
 if (!$promptforsettings && !$createnewsession && !($linkparts[0]=='aid' && $tlwrds != '')) {
 
@@ -1810,7 +1827,7 @@ if (isset($_GET['launch'])) {
 		$aid = $_SESSION['ltiitemid'];
 		$stm = $DBH->prepare("SELECT courseid,ver FROM imas_assessments WHERE id=:id");
 		$stm->execute(array(':id'=>$aid));
-		list($cid, $aver) = $stm->fetch(PDO::FETCH_NUM);
+		list($cid, $aver) = $stm->fetch(PDO::FETCH_NUM) ?: [false,null];
 		if ($cid===false) {
 			$diaginfo = "(Debug info: 4-$aid)";
 			reporterror(_("This assignment does not appear to exist anymore.")." $diaginfo");
@@ -1957,6 +1974,14 @@ if (isset($_GET['launch'])) {
                         }
 					} else {
 						$infoerr = 'Existing username/password provided are not valid.';
+						if (isset($CFG['cloudwatch_loginlog'])) {
+							require_once __DIR__.'/includes/CloudWatchLogger.php';
+							addLoginLog('login_failure', $queryuserid, [
+								'reason' => 'bad_pw',
+								'via' => 'LTI1.1',
+								'ltiuser' => [$ltiuserid, $_SESSION['lti_key']]
+							]);
+						}
 					}
 				}
 			} else {
@@ -2983,6 +3008,15 @@ $_SESSION['ltiuserid'] = $SESS['ltiuserid'];
 $_SESSION['userid'] = $userid;
 $_SESSION['time'] = $now;
 $_SESSION['started'] = $now;
+if ($createnewsession) {
+	if (isset($CFG['cloudwatch_loginlog'])) {
+		require_once __DIR__.'/includes/CloudWatchLogger.php';
+		addLoginLog('login_success', $userid, [
+			'via' => 'LTI1.1',
+			'ltiuser' => [$_SESSION['ltiuserid'], $_SESSION['lti_key']]
+		]);
+	}
+}
 
 if ($_SESSION['lti_keytype']=='cc-vf' || (!$promptforsettings && !$createnewsession && !($keyparts[0]=='aid' && $tlwrds != ''))) {
 	//redirect now if already have session and no timelimit

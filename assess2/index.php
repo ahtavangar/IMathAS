@@ -30,9 +30,9 @@ if ($isltilimited || $inTreeReader) {
 $placeinhead = '<script type="text/javascript">var APIbase = "'.$GLOBALS['basesiteurl'].'/assess2/";';
 $placeinhead .= 'var inTreeReader = ' . ($inTreeReader ? 1 : 0) . ';';
 $placeinhead .= '</script>';
-$placeinhead .= '<link rel="stylesheet" type="text/css" href="'.$staticroot.'/assess2/vue/css/style.css?v=BUg_Ksxd" />';
+$placeinhead .= '<link rel="stylesheet" type="text/css" href="'.$staticroot.'/assess2/vue/css/style.css?v=DY_rBLZY" />';
 $placeinhead .= '<link rel="stylesheet" type="text/css" href="'.$staticroot.'/assess2/print.css?v='.$lastvueupdate.'" media="print">';
-$placeinhead .= '<script src="'.$staticroot.'/mathquill/mathquill.min.js?v=040826" type="text/javascript"></script>';
+$placeinhead .= '<script src="'.$staticroot.'/mathquill/mathquill.min.js?v=051926" type="text/javascript"></script>';
 $placeinhead .= '<script src="'.$staticroot.'/javascript/assess2_min.js?v='.$lastvueupdate.'" type="text/javascript"></script>';
 $placeinhead .= '<link rel="stylesheet" type="text/css" href="'.$staticroot.'/mathquill/mathquill-basic.css?v=032826">
   <link rel="stylesheet" type="text/css" href="'.$staticroot.'/mathquill/mqeditor.css?v=020226">';
@@ -69,8 +69,8 @@ if ((!$isltilimited || $_SESSION['ltirole']!='learner') && !$inTreeReader && !$i
 </noscript>
 <div id="app"></div>
 
-<script defer="defer" type="module" src="<?php echo $staticroot;?>/assess2/vue/js/index.js?v=ttCpGgAE"></script>
-<script defer="defer" nomodule src="<?php echo $staticroot;?>/assess2/vue/js/index-legacy.js?v=BpxIq7ZC"></script>
+<script defer="defer" type="module" src="<?php echo $staticroot;?>/assess2/vue/js/index.js?v=NyK_XBGw"></script>
+<script defer="defer" nomodule src="<?php echo $staticroot;?>/assess2/vue/js/index-legacy.js?v=DOJ2MXHI"></script>
 
 <?php
 $placeinfooter = '<div id="ehdd" class="ehdd" style="display:none;">

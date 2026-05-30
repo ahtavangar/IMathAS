@@ -3415,7 +3415,7 @@ class AssessRecord
     $out = array(
       'scored_version' => $qinfo['scored_version'],
       'score' => $qinfo['score'],
-      'time' => $qinfo['time']
+      'time' => $qinfo['time'] ?? 0
     );
     return $out;
   }
@@ -3672,7 +3672,7 @@ class AssessRecord
           $qdata['scoreoverride'][$pn] = floatval($score);
         }
       }
-      if (is_array($qdata['scoreoverride']) && count($qdata['scoreoverride']) == 0) {
+      if (isset($qdata['scoreoverride']) && is_array($qdata['scoreoverride']) && count($qdata['scoreoverride']) == 0) {
         unset($qdata['scoreoverride']);
       }
     }
@@ -4051,7 +4051,11 @@ class AssessRecord
       }
       for ($tn = 0; $tn < count($parttrydata); $tn++) {
         if ($qtype == 'choices') {
-          $out[$pn][] = $GLOBALS['choicesdata'][$partref][$parttrydata[$tn]['stuans']] ?? $parttrydata[$tn]['stuans'];
+          if (isset($parttrydata[$tn]['stuans']) && isset($GLOBALS['choicesdata'][$partref][$parttrydata[$tn]['stuans']])) {
+            $out[$pn][] = $GLOBALS['choicesdata'][$partref][$parttrydata[$tn]['stuans']] ?? '';
+          } else {
+            $out[$pn][] = $parttrydata[$tn]['stuans'] ?? '';
+          }
         } else if ($qtype == 'multans') {
           $pts = explode('|',$parttrydata[$tn]['stuans'] ?? '');
           $outstr = '';

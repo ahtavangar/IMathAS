@@ -81,10 +81,13 @@ var MQeditor = (function($) {
     if (calcformat.match(/allowplusminus/)) {
         thisMQconfig.quickPlusMinus = true;
     }
-    if (calcformat.match(/ntuple/)) {
+    if (calcformat.match(/ntuple|interval|string/)) {
       thisMQconfig.listCharReturnsTo = [',', 'bracket'];
     } else if (calcformat.match(/list/)) {
       thisMQconfig.listCharReturnsTo = [',', 'baseline'];
+    }
+    if (calcformat.match(/mixed/)) {
+      thisMQconfig.spaceBehavesLikeTab = false;
     }
 
     thisMQconfig.autoOperatorNames = thisMQconfig.autoParenOperators = 

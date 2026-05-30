@@ -50,7 +50,8 @@ if (isset($_POST['catfilter'])) {
 }
 
 
-$query = 'SELECT iar.assessmentid,ia.name,iar.userid,iu.FirstName,iu.LastName,iar.lastchange,iar.score,iar.status,
+$query = 'SELECT iar.assessmentid,ia.name,ia.ptsposs,iar.userid,iu.FirstName,iu.LastName,
+    iar.lastchange,iar.score,iar.status,iar.starttime,iar.timeontask,
     IF(ia.submitby="by_assessment",iar.scoreddata,"") AS scoreddata
     FROM imas_assessment_records AS iar
     JOIN imas_assessments AS ia ON ia.id=iar.assessmentid AND ia.courseid=? ';
@@ -80,6 +81,8 @@ $placeinhead .= '<script>
         return false;
     }
 </script>';
+$placeinhead .= "<script type=\"text/javascript\" src=\"$staticroot/javascript/tablesorter.js?v=051820\"></script>\n";
+
 require_once "../header.php";
 echo '<div class="breadcrumb">'. $curBreadcrumb . '&gt; '.$pagetitle.'</div>';
 echo '<div class="pagetitle"><h1>'.$pagetitle.'</h1></div>';
@@ -111,11 +114,12 @@ echo '<p><button type=submit>'._('Update').'</button></p>';
 if ($stm->rowCount()==0) {
     echo '<p>'._('Nothing has been submitted in the specified time interval').'</p>';
 } else {
-    echo '<table class=gb><thead><tr>';
+    echo '<table class=gb id=maintable><thead><tr>';
     echo '<th>'._('Assessment').'</th>';
     echo '<th>'._('Student').'</th>';
     echo '<th>'._('Score').'</th>';
     echo '<th>'._('Completed Attempts').'</th>';
+    echo '<th>'._('Time Spent (In Questions)').'</th>';
     echo '<th>'._('Last Changed').'</th>';
     echo '<th>'._('Feedback').'</th>';
     echo '</tr></thead><tbody>';
@@ -126,6 +130,7 @@ if ($stm->rowCount()==0) {
         echo '<td><span class="pii-full-name">'.Sanitize::encodeStringForDisplay($row['LastName'].', '.$row['FirstName']).'</span></td>';
         echo '<td><a href="../assess2/gbviewassess.php?'.$qs.'" target="_blank">';
         echo Sanitize::encodeStringForDisplay($row['score']);
+        echo ' ('.Sanitize::encodeStringForDisplay(round(100*$row['score']/$row['ptsposs'],1)).'%)';
         if (($row['status']&3) == 1) { // has unsubmitted attempt or questions
             echo ' (IP)';
         }
@@ -140,6 +145,13 @@ if ($stm->rowCount()==0) {
             echo $totcnt;
         }
         echo '</td>';
+        $timeused = $row['lastchange'] - $row['starttime'];
+		$timeontask = round($row['timeontask']/60,1);
+        echo '<td>'.round($timeused/60).' min';
+        if ($timeontask>0) {
+            echo ' ('.$timeontask.' min)';
+        }
+        echo '</td>';
         echo '<td>'.tzdate('n/j/y g:ia', $row['lastchange']).'</td>';
         echo '<td>';
         if (($row['status']&8) == 8) {
@@ -152,5 +164,6 @@ if ($stm->rowCount()==0) {
     }
     echo '</tbody></table>';
     echo '<p>&nbsp;</p><p>'._('Note: For quiz-style assessments, an IP marker here indicates either an in-progress or unsubmitted attempt.').'</p>';
+    echo "<script>initSortTable('maintable',['S','S','P','N','D','S'],false);</script>\n";
 }
 require_once '../footer.php';

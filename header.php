@@ -74,7 +74,7 @@ var uselocaljs = <?php echo !empty($CFG['GEN']['uselocaljs']) ? 'true' : 'false'
 <?php if (!empty($CFG['nocommathousandsseparator'])) { echo 'var commasep = false;'; } ?>
 <?php if (isset($CFG['S3']['altendpoint'])) { echo 'var altfilesendpoint = "'.Sanitize::encodeStringForDisplay($CFG['S3']['altendpoint']).'";';} ?>
 </script>
-<script src="<?php echo $staticroot;?>/javascript/general.js?v=032626"></script>
+<script src="<?php echo $staticroot;?>/javascript/general.js?v=051926"></script>
 <?php
 // override allowedImgDomains if set in config
 if (isset($CFG['GEN']['allowedImgDomains'])) {
@@ -120,7 +120,7 @@ if (!isset($_SESSION['mathdisp'])) {
 	echo "<script>var usingASCIIMath = false; var AMnoMathML=true; var MathJaxCompatible = false; var mathRenderer=\"Image\";function rendermathnode(el,callback) {AMprocessNode(el);} if(typeof callback=='function'){callback();}</script>";
 } else if ($_SESSION['mathdisp'] == 8) { // mathjax 3
 	echo '<script>var mathjaxdisp = 8;</script>'; 
-    echo "<script src=\"$staticroot/javascript/mathjaxconfig.js?ver=041126\"></script>\n";
+    echo "<script src=\"$staticroot/javascript/mathjaxconfig.js?ver=051526\"></script>\n";
     echo '<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js" id="MathJax-script"></script>';
 	echo '<style>span.AM { font-size: 105%;} </style>';
 } else if ($_SESSION['mathdisp'] > 0) { // mathjax
@@ -139,7 +139,7 @@ if (!isset($_SESSION['mathdisp'])) {
 }
 echo "<script src=\"$staticroot/javascript/mathparser_min.js?v=031126\"></script>\n";
 if (isset($_SESSION['graphdisp']) && $_SESSION['graphdisp']==1) {
-	echo "<script src=\"$staticroot/javascript/ASCIIsvg_min.js?v=042126\"></script>\n";
+	echo "<script src=\"$staticroot/javascript/ASCIIsvg_min.js?v=051726\"></script>\n";
 	echo "<script>var usingASCIISvg = true;</script>";
 	//echo "<script src=\"$imasroot/course/editor/plugins/AsciiSvg/ASCIIsvgAddon.js\"></script>\n";
 } else if (isset($_SESSION['graphdisp'])) {

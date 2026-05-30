@@ -1,0 +1,574 @@
+/*General settings - fonts, overall page background, etc*/
+html{
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    padding: 0;
+    margin: 0;
+    min-width: 320px;
+}
+
+body {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    /* background: url('humber/img/humber-imathas.jpg') no-repeat fixed -230px -190px; */
+    padding: 0;
+    margin: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: normal;
+    line-height: 23px;
+    color: rgba(40,40,40,0.9);
+}
+
+h1 {
+    font-size: 26px;
+    line-height: 48px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+.mainbody .midwrapper .front {
+    display: grid;
+    grid-template-columns: auto 420px;
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    grid-template-areas: "front-page login-box"
+                         "copywrite copywrite";
+}
+@media (max-width: 1060px) {
+    .mainbody .midwrapper .front {
+        grid-template-columns: auto;        
+        grid-column-gap: 0px;
+        grid-template-areas: "login-box"
+                             "front-page"
+                             "copywrite";
+    }
+}
+
+.mainbody .midwrapper .front aside#login-box {
+    grid-area: login-box;
+
+    background-color: #e9e9e9;    
+    padding: 10px;
+    border-radius: 10px;    
+}
+
+.mainbody .midwrapper .front aside#login-box h1 {
+    margin: 5px 0 10px;
+}
+
+.mainbody .midwrapper .front article#font-page {
+    grid-area: front-page;
+
+    background-color: #f3f5f7;
+    padding: 10px;
+    border-radius: 10px;
+}
+.mainbody .midwrapper .front article#font-page ul {
+    display: flow-root;
+}
+
+.mainbody .midwrapper .front div#copywrite {
+    grid-area: copywrite;
+    font-size: 14px;
+}
+
+ul#navlist {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    float: left;
+    width: 100%;
+    color: #fff;
+    background-color: #004b78;
+}
+ul#navlist li a {
+    float: left;
+    width: 5em;
+    color: #fff;
+    background-color: #004b78;
+    padding: 15px;
+    text-decoration: none;
+    border-right: 1px solid #fff;
+    text-align: center;
+}
+
+div.breadcrumb {
+    border: 1px solid #000;
+    border: 0px;
+    background-color: #e9e9e9;
+}
+
+/* Header */
+.headerwrapper {
+    display: grid;
+    grid-template-columns: auto 200px;
+    grid-template-areas: "branding humberlogo"
+                         "navigation navigation";
+}
+
+@media (max-width: 480px) {
+    .headerwrapper {
+        grid-template-columns: auto 160px;        
+    }
+}
+
+.headerwrapper .branding {
+    grid-area: branding;
+}
+
+.headerwrapper .humberlogo {
+    grid-area: humberlogo;
+    align-self: center;
+}
+
+.headerwrapper #navlistcont {
+    grid-area: navigation;
+}
+
+img#humber-logo {
+    max-width: 100%;    
+    height: auto;
+}
+
+.midwrapper .text {
+    background-color: #f3f5f7;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+div.login-form {
+    margin: 0 0 10px 0;
+}
+
+div.login-form input[type=text], 
+div.login-form input[type=password] {
+    padding: 0px;
+    font-size: 16px;
+    width: 100%;
+    height: 25px;
+}
+
+.message {
+    box-sizing: border-box;
+    margin: 5px 0;
+    padding: 10px;
+    color: #fff;
+    border-width: 0 0 0 5px; /* LTR */
+    border-style: solid;
+    border-color: #353641;
+    border-radius: 4px;
+    background-color: #353641;    
+}
+
+.message.warning {
+    border-color: #e0ac00;
+}
+.message.error {
+    border-color: #e34f4f;
+}
+
+input[type=text], 
+input[type=password] {
+    padding: 0px;
+    font-size: 16px;
+    height: 25px;
+}
+
+input[type=submit],
+input[type=button], 
+button, 
+a.abutton, 
+span.fakebutton {
+	color: #fff !important;
+	background-color: #005b83 !important;	
+	border: 1px solid #005b83;
+	font: inherit;
+    font-weight: 400;
+    border-radius: 0;
+	padding: 3px 12px;
+	margin: 2px 3px;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+input[type=submit]:hover, 
+button:hover,
+input[type=button]:hover, 
+a.abutton:hover,
+input[type=submit]:focus, 
+button:focus, 
+input[type=button]:focus, 
+a.abutton:focus {
+	background-color: #004969;    
+}
+
+div.mce-btn input[type=submit],
+div.mce-btn input[type=button], 
+div.mce-btn button {
+    color: #000 !important;
+    background-color: #eee !important;
+}
+
+button.switch-toggle {
+    color: #000 !important;
+    background-color: transparent !important;
+}
+
+
+input[type="submit"].secondarybtn, input[type="button"].secondarybtn, button.secondarybtn {
+    color: #fff !important;
+    background-color: #617983;
+}
+
+input[type="submit"].secondarybtn:enabled:hover, input[type="button"].secondarybtn:enabled:hover, 
+button.secondarybtn:enabled:hover, input[type="submit"].secondarybtn:focus, input[type="button"].secondarybtn:focus, 
+button.secondarybtn:focus {
+    background-color: #4b5a61;
+}
+
+div#viewbuttoncont {
+    float: right;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;    
+}
+
+div#viewbuttoncont a.buttonactive {
+    border-radius: 0;
+}
+
+div#viewbuttoncont a.buttoninactive {
+    border-radius: 0;
+}
+
+/*Link styles*/
+a:link {
+	text-decoration: none;
+    color: #005173;
+}
+a:visited {
+	text-decoration: none;
+    color: #005173;
+}
+a:hover {
+	text-decoration: underline;
+    color: #005173;
+}
+
+/*Container for course items*/
+div.item {
+	/*border: 1px solid #000;*/
+	background-color: #fff;
+}
+
+/*Container for editor*/
+div.editor {
+	border: 1px solid #000;
+}
+
+/*Default block container*/
+div.block, div.blockitems div.blockitems div.block {
+	/*border: 1px solid #000;*/
+	background-color: #e9e9e9;
+}
+
+/*Default block item container*/
+div.blockitems, div.blockitems div.blockitems div.blockitems {
+	/*border: 1px solid #000;*/
+	border-top: 0px;
+	background-color: #f3f5f7;
+}
+
+/*Second level default block container*/
+div.blockitems div.block {
+	background-color: #dfd;
+}
+
+/*Second level default block item container */
+div.blockitems div.blockitems {
+	background-color: #efe;
+}
+
+/*Icons*/
+div.icon {
+	color:#00d;	
+	border: 1px solid #00f;
+	font-weight: bolder;
+}
+
+
+/*Control panels*/
+div.cp {
+	/*border: 1px solid #000;*/
+	background-color: #ddd;
+}
+div.cpmid {
+	/*border: 1px solid #000;*/
+	background-color: #ddd;
+}
+
+
+
+
+table thead th {
+	font-weight:bold;
+	cursor:pointer;
+}
+
+/*Tables */
+table.gb thead th, table.gbl thead th, table.gbl thead th.locked {
+	border-bottom: 2px solid #00f;
+	background-color: #e9e9e9;
+}
+tr.even, tr.even td {
+	background-color: #fff;	
+}
+tr.odd, tr.odd td {
+	background-color: #dfd;
+}
+tr.bordered  td {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+tr.highlight, tr.highlight td {
+	background-color: #ddf;
+}
+tr.grid td {
+	border: 1px solid #000;
+}
+tr.dbltop td {
+	border-top: 3px double #000;
+}
+
+table.gbl td.locked, table.gbl th.locked {
+	border-right: 2px solid #00f;
+}
+
+/*Category header colors*/
+table.gb .catdf {
+	background-color: #e9e9e9;
+}
+table.gb .cat0 {
+	background-color: #ddf;
+}
+table.gb .cat1 {
+	background-color: #dfd;
+}
+table.gb .cat2 {
+	background-color: #fdd;
+}
+table.gb .cat3 {
+	background-color: #dff;
+}
+table.gb .cat4 {
+	background-color: #ffd;
+}
+table.gb .cat5 {
+	background-color: #fdf;
+}
+table.gb .cat6 {
+	background-color: #aaf;
+}
+table.gb .cat7 {
+	background-color: #afa;
+}
+table.gb .cat8 {
+	background-color: #faa;
+}
+table.gb .cat9 {
+	background-color: #aff;
+}
+.cattothdr {
+	font-variant: small-caps
+}
+
+table.cal td {
+    border: 1px solid #000;
+    width: 14%;
+    height: 100px;
+    vertical-align: top;
+}
+
+table.cal thead th {
+    text-align: center;
+    background-color: #e9e9e9;
+    border: 1px solid #000;
+}
+
+span.day {
+    background: none;
+    font-weight: bold;
+}
+
+.caldatebar {
+    background: none;
+}
+
+/*Fake look of links for Javascript onclicks*/
+span.link {
+	text-decoration: underline;
+	color: #00f;
+	cursor: pointer;
+}
+
+
+/*Containers for instructor leftbar, main content*/
+#leftcontent {
+    background:#eee;
+    border: 1px solid #d7d7d7;
+    color:#000;    
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#centercontent {
+	background:none;
+    margin-left: 200px;
+}
+
+div.ddmenu {
+	padding: 5px;
+	background: #e9e9e9;
+}
+
+/*colors and borders for assessments*/
+/*seq question css*/
+div.curquestion {
+
+}
+div.inactive {
+	border: 1px solid #bbd;
+}
+div.prequestion {
+	border: 1px solid #bbd;
+}
+hr.seq {
+
+}
+div.seqqinfocur {
+
+}
+div.seqqinfocur span.current{
+
+}
+div.seqqinfoavail {
+
+}
+div.seqqinfoinactive {
+
+}
+div.todoquestion {
+	background-color: #ffffcc; 
+	border: 0px; 
+}
+/*all questions*/
+div.question {
+	background-color: #ddf; 
+	border: 1px solid #bbd;
+}
+
+
+div.review { /*info bar*/
+	margin-top: -6px;
+	background-color: #e0ffe0;
+	border: 1px solid #bbd;
+}
+div.intro {
+	border: 0px;
+	background-color: #ffc;
+}
+div.navbar {
+	background:#e0ffe0;
+	border: 1px solid #bbd;
+	color:#000;
+}
+div.navbar a {
+	color: blue;
+}
+span.current {
+	background-color: #ffa;
+}
+span.done {
+	text-decoration: line-through;
+}
+a.newnote {
+	font-size: 90%;
+}
+
+/* TinyMCE 8 toolbar button overrides — undo the broad button rule */
+.tox .tox-tbtn {
+    align-items: center;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 3px;
+    box-shadow: none !important;
+    color: #222 !important;
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    height: 28px;
+    justify-content: center;
+    margin: 6px 1px 5px 0;
+    outline: 0;
+    padding: 0;
+    text-transform: none;
+    width: 34px;
+}
+.tox .tox-tbtn:hover,
+.tox .tox-tbtn:focus {
+    background: #e0e0e0 !important;
+    color: #222 !important;
+}
+.tox .tox-tbtn svg {
+    fill: #222 !important;
+}
+.tox .tox-tbtn--enabled,
+.tox .tox-tbtn--enabled:hover {
+    background: #d0d8e4 !important;
+}
+.tox .tox-tbtn__select-label,
+.tox .tox-tbtn .tox-tbtn__select-label {
+    color: #222 !important;
+}
+
+button.nopad {
+    padding: 2px;
+    background-color: #005b83 !important;
+}
+
+button.nopad img {
+    filter: brightness(0) invert(1);
+}
+
+
+

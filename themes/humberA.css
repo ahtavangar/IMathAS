@@ -1,0 +1,811 @@
+/*General settings - fonts, overall page background, etc*/
+html{
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    padding: 0;
+    margin: 0 auto;
+    min-width: 320px;
+    /*max-width: 1200px;*/
+}
+
+body {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+
+    /* background: url('humber/img/humber-imathas.jpg') no-repeat fixed -230px -190px; */
+    padding: 0 20px;
+    margin: 10px auto;
+   
+}
+
+/*New*/
+body.notfw {
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    padding: 0 20px;
+    margin: 10px auto;
+
+}
+
+@media (max-width: 768px) {
+    body, body.notfw {
+        padding: 0;
+    }
+}
+
+/*
+body.notfw {
+	background-color:red;
+	background-image:url(../img/simplebg.png);
+	background-position:center top;
+	background-repeat:repeat-y;
+
+}
+
+*/
+
+div.mainbody {
+	height:auto;
+}
+
+
+
+/*New*/
+.notfw .midwrapper{
+	
+	margin: 10px auto;
+	box-shadow: 5px 0 5px -5px grey, -5px 0 5px -5px grey;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 35px;
+	padding-top: 15px;
+	border-radius: 0px 0px 5px 5px;
+	border: 0px 1px 0px 1px solid #e1e1e1;
+    /*max-width:1200px;*/
+
+	
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: normal;
+    line-height: 23px;
+    color: rgba(40,40,40,0.9);
+}
+
+h1 {
+    /*font-size: 26px;*/
+    line-height: 48px;
+    font-weight:500; /* NEW*/
+  }
+  h2 {
+    /*font-size: 24px;*/
+    line-height: 28px;
+    font-weight:500; /* NEW*/
+  }
+  h3 {
+    /*font-size: 20px;*/
+    line-height: 24px;
+  }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+.mainbody .midwrapper .front {
+    display: grid;
+    grid-template-columns: auto 420px;
+    grid-template-rows: auto;
+    grid-column-gap: 10px;
+    grid-template-areas: "front-page login-box"
+                         "copywrite copywrite";
+}
+@media (max-width: 1060px) {
+    .mainbody .midwrapper .front {
+        grid-template-columns: auto;        
+        grid-column-gap: 0px;
+        grid-template-areas: "login-box"
+                             "front-page"
+                             "copywrite";
+    }
+}
+
+.mainbody .midwrapper .front aside#login-box {
+    grid-area: login-box;
+
+    background-color: #e9e9e9;    
+    padding: 10px;
+    border-radius: 10px;    
+}
+
+.mainbody .midwrapper .front aside#login-box h1 {
+    margin: 5px 0 10px;
+}
+
+.mainbody .midwrapper .front article#font-page {
+    grid-area: front-page;
+    
+    background-color: #f3f5f7;
+    padding: 10px;
+    border-radius: 10px;
+}
+.mainbody .midwrapper .front article#font-page ul {
+    display: flow-root;
+}
+
+.mainbody .midwrapper .front div#copywrite {
+    grid-area: copywrite;
+    font-size: 14px;
+}
+
+ul#navlist {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+    float: left;
+    width: 100%;
+    color: #fff;
+    background-color: #004b78;
+	border-radius: 5px 5px 0px 0px;
+    box-shadow: 5px 0 5px -5px grey, -5px 0 5px -5px grey;
+}
+ul#navlist li a {
+    float: left;
+    width: 5em;
+    color: #fff;
+    background-color: #004b78;
+    padding: 15px;
+    text-decoration: none;
+    border-right: 1px solid #fff;
+    text-align: center;
+	border-radius: 5px 5px 5px 5px;
+   
+}
+
+div.breadcrumb {
+    border: 1px solid #000;
+    border: 0px;
+    background-color: #e9e9e9;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+
+/* Header */
+.headerwrapper {
+    display: grid;
+    grid-template-columns: auto 200px;
+    grid-template-areas: "branding humberlogo"
+                         "navigation navigation";
+    /*max-width:1230px;  NEW */
+    margin-left:auto; /* NEW */
+    margin-right:auto; /* NEW */
+    margin-top: 20px; /* NEW*/
+}
+
+@media (max-width: 480px) {
+    .headerwrapper {
+        grid-template-columns: auto 160px;        
+    }
+}
+
+.headerwrapper .branding {
+    grid-area: branding;
+}
+
+.headerwrapper .humberlogo {
+    grid-area: humberlogo;
+    align-self: center;
+}
+
+.headerwrapper #navlistcont {
+    grid-area: navigation;
+    
+}
+
+img#humber-logo {
+    max-width: 100%;    
+    height: auto;
+}
+
+.midwrapper .text {
+    background-color: #f3f5f7;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+
+
+div.login-form {
+    margin: 0 0 10px 0;
+}
+
+div.login-form input[type=text], 
+div.login-form input[type=password] {
+    padding: 0px;
+    /*font-size: 16px;*/
+    width: 100%;
+    height: 25px;
+}
+
+.message {
+    box-sizing: border-box;
+    margin: 5px 0;
+    padding: 10px;
+    color: #fff;
+    border-width: 0 0 0 5px; /* LTR */
+    border-style: solid;
+    border-color: #353641;
+    border-radius: 4px;
+    background-color: #353641;    
+}
+
+.message.warning {
+    border-color: #e0ac00;
+}
+.message.error {
+    border-color: #e34f4f;
+}
+
+input[type=text], 
+input[type=password] {
+    padding: 0px;
+    font-size: 14px;
+    height: 20px;
+}
+
+input[type=submit],
+input[type=button], 
+button, 
+a.abutton, 
+span.fakebutton {
+	color: #fff !important;
+	background-color: #005b83;	
+	border: 1px solid #005b83;
+	font: inherit;
+    	padding: 3px 12px;
+	margin: 2px 3px;
+   	-webkit-transition: all 0.5s ease;
+   	-moz-transition: all 0.5s ease;
+   	-o-transition: all 0.5s ease;
+   	cursor: pointer; /* NEW */
+    	box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2); /* NEW , 0 4px 4px 0 rgba(0,0,0,0.19)*/
+    	border-radius: 6px; /* NEW */
+}
+
+input[type=submit]:hover, button:hover, input[type=button]:hover, a.abutton:hover,
+input[type=submit]:focus, button:focus, input[type=button]:focus, a.abutton:focus {
+	background-color: #032d40 !important;
+	           
+}
+
+
+div.mce-btn input[type=submit], div.mce-btn input[type=button], 
+div.mce-btn button {
+    	color: #000 !important;
+    	background-color: #eee !important;
+	border-radius: 2px !important;
+	box-shadow: none !important; /* NEW to override the box-shadow defined above for bttons in editors */
+}
+
+/*NEW buttons on the pop-up calendar in assessment settings*/
+.dpButton, .dpTodayButton {
+	background-color: #005b83;
+	padding:2px; 
+	font-weight: normal;
+
+}
+
+/*NEW box on the pop-up calendar in assessment settings*/
+
+.dpTable {
+	background-color: #e9e9e9;
+	box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+    	border-radius: 6px;
+
+
+}
+
+/*NEW calendar header on the pop-up calendar in assessment settings*/
+
+.dpDayTD {
+	background-color: #8f8e8e;
+
+}
+ 
+button.switch-toggle {
+    color: #000 !important;
+    background-color: transparent !important;
+}
+
+/*NEW Action toggles in Add/Remove Questions of Assessments*/
+button.plain {
+	
+	background-color: #005b83;
+	
+}
+
+/* NEW the key answer toggle in preview questions */
+.keybtn {
+	background-color: #4ca6cd;
+	border: 1px solid  #005b83;
+}
+
+
+
+
+div#viewbuttoncont {
+    float: right;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;    
+}
+
+div#viewbuttoncont a.buttonactive {
+    
+	box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2); /* NEW , 0 4px 4px 0 rgba(0,0,0,0.19)*/
+    	border-radius: 6px; /* NEW */
+
+}
+
+div#viewbuttoncont a.buttoninactive {
+    	border-radius: 3px;
+	box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2); /* NEW , 0 4px 4px 0 rgba(0,0,0,0.19)*/
+    	border-radius: 6px; /* NEW */
+
+}
+
+/*Link styles*/
+a:link {
+	text-decoration: none;
+    color: #005173;
+}
+a:visited {
+	text-decoration: none;
+    color: #005173;
+}
+a:hover {
+	text-decoration: underline;
+    color: #005173;
+}
+
+/*Container for course items*/
+div.item {
+	/*border: 1px solid #000;*/
+	background-color: #fff;
+}
+
+/*Container for editor*/
+div.editor {
+	border: 1px solid #000;
+}
+
+/*Default block container*/
+div.block, div.blockitems div.blockitems div.block {
+	/*border: 1px solid #000;*/
+	background-color: #e9e9e9;
+	padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px 10px 0 0;
+}
+
+
+/*Default block item container*/
+div.blockitems, div.blockitems div.blockitems div.blockitems {
+	/*border: 1px solid #000;*/
+	border-top: 0px;
+	background-color: #f3f5f7;
+	
+}
+
+/*Second level default block container*/
+div.blockitems div.block {
+	background-color: #dfd;
+}
+
+/*Second level default block item container */
+div.blockitems div.blockitems {
+	background-color: #efe;
+}
+
+/*Icons*/
+div.icon {
+	color:#00d;	
+	border: 1px solid #00f;
+	font-weight: bolder;
+}
+
+
+/*Control panels*/
+div.cp {
+	/*border: 1px solid #000;*/
+	background-color: #ddd;
+}
+div.cpmid {
+	/*border: 1px solid #000;*/
+	background-color: #ddd;
+}
+
+
+
+
+table thead th {
+	font-weight:bold;
+	cursor:pointer;
+}
+
+/*Tables */
+table.gb thead th, table.gbl thead th, table.gbl thead th.locked {
+	border-bottom: 2px solid #6b6b6e;
+	background-color: #e9e9e9;
+}
+tr.even, tr.even td {
+	background-color: #fff;	
+}
+tr.odd, tr.odd td {
+	background-color: #e9e9e994;
+}
+tr.bordered  td {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+tr.highlight, tr.highlight td {
+	background-color: #ddf;
+}
+tr.grid td {
+	border: 1px solid #000;
+}
+tr.dbltop td {
+	border-top: 3px double #000;
+}
+
+table.gbl td.locked, table.gbl th.locked {
+	border-right: 2px solid #00f;
+}
+
+/*Category header colors*/
+table.gb .catdf {
+	background-color: #e9e9e9;
+}
+table.gb .cat0 {
+	background-color: #ddf;
+}
+table.gb .cat1 {
+	background-color: #dfd;
+}
+table.gb .cat2 {
+	background-color: #fdd;
+}
+table.gb .cat3 {
+	background-color: #dff;
+}
+table.gb .cat4 {
+	background-color: #ffd;
+}
+table.gb .cat5 {
+	background-color: #fdf;
+}
+table.gb .cat6 {
+	background-color: #aaf;
+}
+table.gb .cat7 {
+	background-color: #afa;
+}
+table.gb .cat8 {
+	background-color: #faa;
+}
+table.gb .cat9 {
+	background-color: #aff;
+}
+.cattothdr {
+	font-variant: small-caps
+}
+
+table.cal td {
+    border: 1px solid #808080; /*NEW*/
+    width: 14%;
+    /*height: 100px;*/ /*NEW removed*/
+    vertical-align: top;
+}
+
+table.cal thead th {
+    text-align: center;
+    background-color: #e9e9e9;
+    border: 1px solid #000;
+}
+
+span.day {
+    background: none;
+    font-weight: bold;
+}
+
+.caldatebar {
+    background: none;
+}
+
+
+/*Fake look of links for Javascript onclicks*/
+span.link {
+	text-decoration: underline;
+	color: #00f;
+	cursor: pointer;
+}
+
+
+/*Containers for instructor leftbar, main content*/
+#leftcontent {
+    background:#eee;
+    border: 1px solid #d7d7d7;
+    color:#000;    
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+	
+}
+
+#centercontent {
+	background:none;
+    margin-left: 200px;
+}
+
+div.ddmenu {
+	padding: 5px;
+	background: #e9e9e9;
+}
+
+/*colors and borders for assessments*/
+/*seq question css*/
+div.curquestion {
+
+}
+div.inactive {
+	border: 1px solid #bbd;
+}
+div.prequestion {
+	border: 1px solid #bbd;
+}
+hr.seq {
+
+}
+div.seqqinfocur {
+
+}
+div.seqqinfocur span.current{
+
+}
+div.seqqinfoavail {
+
+}
+div.seqqinfoinactive {
+
+}
+div.todoquestion {
+	background-color: #ffffcc; 
+	border: 0px; 
+}
+
+
+/*all questions*/
+
+
+/* NEW question background in written example page */
+div.question {
+	
+	font-family: inherit;
+	background-color: #f3f3f3; 
+	border: 1px solid #d6d6db;
+	width: auto   /*new */
+
+}
+
+/* NEW solution background in written example page */
+
+div.review { /*info bar*/
+	margin-top: -6px;
+	background-color: #e5f9ff; /*#e0faff;*/
+	border: 1px solid #005b8342;
+	width: auto;   /*new */
+	font-size: medium; /*NEW*/
+}
+
+/*NEW detailed solution box*/
+
+.dsbox {
+	background-color: #e5f9ff;
+}
+
+
+div.intro {
+	border: 0px;
+	background-color: #ffc;
+}
+div.navbar {
+	background:#e0ffe0;
+	border: 1px solid #bbd;
+	color:#000;
+}
+div.navbar a {
+	color: blue;
+}
+span.current {
+	background-color: #ffa;
+}
+span.done {
+	text-decoration: line-through;
+}
+a.newnote {
+	font-size: 90%;
+}
+
+
+/*NEW Question pane width in assessments*/
+
+questionpane.introtext,.questionpane>.question>.question {
+    max-width: 800px;
+    overflow: visible
+}
+
+/*NEW*/
+.full-question-header {
+	max-width: 825px;
+
+}
+
+/*NEW the question drop-down top navigator in the assessment */
+
+.menubutton button {
+	color: black !important;
+	background-color: #cae8f5;
+}
+
+.menubutton button:focus, .menubutton button:hover {
+	
+	background-color: #d0eefb !important;
+}
+
+
+/*NEW Calendar Table */
+
+table.cal {
+	border-collapse: collapse;
+	border-style: hidden;
+	width: 100%;
+	table-layout: fixed;
+	box-sizing: border-box;
+	box-shadow: 5px 1px 5px #CCCCCC,-5px -1px 5px #CCCCCC;
+	border-radius: 5px;
+	margin-top:10px;
+}
+table.cal td, table.cal th {
+	overflow: hidden;
+	word-wrap: break-word;
+}
+table.cal thead th {
+	text-align: center;
+	background-color: #eee;
+	border: 0px solid #000;
+	border-radius: 5px 0px 5px;
+}
+
+.today {
+	background-color: #cfe4ed;
+}
+
+.day {
+	font-size: 80%;
+	background-color: #ddf;
+}
+
+/*NEW text select highlist color */
+::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: #005b83;
+}
+
+::selection {
+  color: white;
+  background: #005b83;
+}
+
+/* NEW 2026 */
+
+/*calendar week navigation buttons */
+
+button.nopad {
+  padding: 1px 4px !important;
+  background-color: #559bb9;
+}
+
+button.plain {
+  
+  background-color: #559bb9;
+}
+
+
+/* calendar button */
+button[aria-selected=true], button[aria-selected=true]:hover, button[aria-selected=true]:focus {
+    background-color: #005b83;
+}
+
+input[type="submit"].secondarybtn, input[type="button"].secondarybtn, button.secondarybtn {
+    color: #fff !important;
+    background-color: #005b83;  /* NEW*/
+}
+
+input[type="submit"].secondarybtn:enabled:hover, input[type="button"].secondarybtn:enabled:hover, 
+button.secondarybtn:enabled:hover, input[type="submit"].secondarybtn:focus, input[type="button"].secondarybtn:focus, 
+button.secondarybtn:focus {
+    background-color: #9bdcf8  !important; /* #032d40 NEW*/
+
+}
+
+.viewall{
+
+	background-color: #005b83;
+}
+
+
+
+/* manage questions table */
+#myTable tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#myTable tr:nth-child(odd) {
+  background-color: #e9e9e994;
+}
+
+/*answerbox input */
+input[type="text"]:hover {
+  border-color: #3498db; /* Changes the border color */
+  background-color: #f0f8ff; /* Changes the background color */
+  
+}
+
+#searchclear{
+    border-color: #3498db !important;
+    background-color: #1E74D1 !important; 
+}
+
+#searchclear:enabled:hover{
+    background-color: #023f80 !important;
+}
+
+.tox .tox-tbtn:hover,
+.tox .tox-tbtn:focus {
+    background: #e0e0e0 !important;
+    color: #222 !important;
+}
+.tox .tox-tbtn svg {
+    fill: #222 !important;
+}
+.tox .tox-tbtn--enabled,
+.tox .tox-tbtn--enabled:hover {
+    background: #d0d8e4 !important;
+}
+.tox .tox-tbtn__select-label,
+.tox .tox-tbtn .tox-tbtn__select-label {
+    color: #222 !important;
+}
+
+button.nopad img {
+    filter: brightness(0) invert(1);
+}

@@ -12,7 +12,7 @@ IMathAS powers MyOpenMath.com, WAMAP.org, Lumen OHM, XYZhomework, and others.
 
 ### Requirements
 IMathAS is designed for simple installation with minimal requirements.  The system
-requires PHP 7.4+, and MySQL 5.6+.  PHP has the following recommended or required extensions:
+requires PHP 7.4+, and MySQL 5.7+.  PHP has the following recommended or required extensions:
 - mbstring (required)
 - pdo_mysql (required)
 - gettext (required)
@@ -60,6 +60,7 @@ These are all added to the `config.php` by the install script.
 -   `$imasroot`: The web root of the imathas install.  An empty string if installed at the web root, or something like `'/imathas'` if installed in a directory.
 -   `$mathimgurl`: An absolute path or full url to a [Mimetex](http://www.forkosh.com/mimetex.html) installation, for math image fallback
 -   `$CFG['GEN']['mathcgisvg']`: Set to true if you change $mathimgurl to something that returns svgs instead of images, like [this option](https://github.com/drlippman/IMathAS-Extras/tree/master/mathsvg)
+-   `$CFG['GEN']['mathimgurlexport']`: An absolute path or full url for math image fallback to use for exports, if $mathimgurl is domain restricted.
 -   `$colorshift`: Whether icons should change colors as due date approaches. I thought this was cute, but others might find it annoying.
 -   `$smallheaderlogo`: Text or an HTML image tag for a small (120 x 80) logo to display at the top right of course pages.
 -   `$allownongrouplibs`: Whether non-admins should be allowed to create non-group libraries. On a single-school install, set to true; for larger installs that plan to use the Groups features, set to false.
@@ -123,6 +124,9 @@ to the new assessment interface.
 - `$CFG['newrelic_log_question_errors']`: Enable to log question errors to newrelic, if extension is installed
 - `$CFG['GEN']['sessionmaxlife']`: Overrides session.gc_maxlifetime.
 - `$CFG['GEN']['gc_divisor']`: Overrides session.gc_divisor.
+- `$CFG['cloudwatch_loginlog']`: Enable login logging to AWS Cloudwatch.  Set to array with keys 
+    `region, logGroup, logStream, accessKey, secretKey`. See `includes/CloudWatchLogger.php` for details on 
+    Cloudwatch setup.
 
 ### Additional Validation
 These provide additional validation options beyond `$loginformat`.

@@ -943,7 +943,7 @@ for ($i=0;$i<count($hdrs);$i++) {
 }
 echo "</tbody></table>";
 
-echo "<div style=\"margin-top: 10px; padding:10px; border:1px solid #000;\">";
+echo "<div class=\"calagenda\" style=\"margin-top: 10px; padding:10px; border:1px solid #ccc; border-radius:6px;\">";
 echo '<p id=agendaheader style="display:none" aria-live="polite"><b>' . _("Agenda for ") . $firstdate . ' - ' . $lastdate.'</b></p>';
 echo "<div id=\"caleventslist\"></div><div class=\"clear\"></div></div>";
 if ($calview == 1) {

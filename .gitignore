@@ -11,7 +11,7 @@ HTMLPurifier
 .claude/
 CLAUDE.md
 CLAUDE.local.md
-README.md  # only if you don't want this committed either
+README.md  
 
 # IMATHAS
 config.php

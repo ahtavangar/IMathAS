@@ -13,6 +13,7 @@
 	require_once '../includes/videodata.php';
 	require_once '../includes/htmlutil.php';
 	require_once '../includes/a11yscan.php';
+	require_once '../includes/aiclient.php';
 
 	if ($myrights<20) {
 		require_once "../header.php";
@@ -1132,6 +1133,59 @@ if ($olnames !== '') {
 	echo ' | <a href="modtutorialq.php?'.Sanitize::encodeStringForDisplay($_SERVER['QUERY_STRING']).'">'._('Tutorial Style editor').'</a>';
 }?>
 </p>
+<?php if (aiUserAllowed()) { ?>
+<div id="aiassistbox" style="margin:6px 0;padding:8px;border:1px solid #ccc;border-radius:4px;background:#f7f7f9;">
+  <button type="button" id="aiExplainFixBtn" onclick="aiExplainFix()"><?php echo _('AI: Explain / Fix'); ?></button>
+  <input type="text" id="aiFixPrompt" style="width:45%" placeholder="<?php echo Sanitize::encodeStringForDisplay(_('Optional: what should it check or fix?')); ?>">
+  <span id="aiStatus" class="noticetext"></span>
+  <div id="aiResult" style="display:none;white-space:pre-wrap;margin-top:8px;padding:8px;background:#fff;border:1px solid #ddd;max-height:400px;overflow:auto;"></div>
+</div>
+<script type="text/javascript">
+function aiExplainFix() {
+    if (typeof tinyMCE !== 'undefined') { tinyMCE.triggerSave(); }
+    var btn = document.getElementById('aiExplainFixBtn');
+    var status = document.getElementById('aiStatus');
+    var resultBox = document.getElementById('aiResult');
+    function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+    var fd = new FormData();
+    fd.append('mode', 'fix');
+    fd.append('qtype', val('qtype'));
+    fd.append('control', val('control'));
+    fd.append('answerbox', val('answerbox'));
+    fd.append('qtext', val('qtext'));
+    fd.append('solution', val('solution'));
+    fd.append('userprompt', val('aiFixPrompt'));
+
+    btn.disabled = true;
+    status.textContent = '<?php echo Sanitize::encodeStringForJavascript(_('Analyzing draft...')); ?>';
+    resultBox.style.display = 'none';
+    resultBox.textContent = '';
+
+    fetch('<?php echo $imasroot; ?>/course/aiquestion.php?mode=fix', {
+        method: 'POST',
+        body: fd,
+        credentials: 'same-origin'
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        btn.disabled = false;
+        status.textContent = '';
+        if (data && data.success) {
+            resultBox.textContent = data.text;
+            resultBox.style.display = 'block';
+        } else {
+            alert((data && data.error) ? data.error : '<?php echo Sanitize::encodeStringForJavascript(_('The AI request failed.')); ?>');
+        }
+    })
+    .catch(function() {
+        btn.disabled = false;
+        status.textContent = '';
+        alert('<?php echo Sanitize::encodeStringForJavascript(_('The AI request failed.')); ?>');
+    });
+}
+</script>
+<?php } ?>
 <div id=ccbox>
 <label for=control><?php echo _('Common Control'); ?></label>: <span class="noselect"><span class=pointer onclick="incctrlboxsize('control')">[+]</span><span class=pointer onclick="decctrlboxsize('control')">[-]</span></span>
 <input type=button id="solveropenbutton" value="Solver">

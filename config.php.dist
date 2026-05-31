@@ -124,6 +124,34 @@
   //$AWSsecret = "";
   //$AWSbucket = "";
 
+  //AI Question Authoring assistant (course/moddataset.php editor).
+  //Sends question-authoring prompts to an external model provider; leave the
+  //block out (or set 'enabled' => false) to disable entirely.  Content sent to
+  //the provider may include the author's prompt and existing draft fields — see
+  //includes/aiclient.php.  Anthropic (Claude) is the default provider.
+  /*
+  $CFG['AI'] = array(
+    'enabled'        => true,
+    'provider'       => 'anthropic',                  // swappable
+    'apikey'         => 'sk-ant-...',
+    'model'          => 'claude-opus-4-8',            // stage 2 generation
+    'routermodel'    => 'claude-haiku-4-5-20251001',  // stage 1 router (cheap/fast)
+    'fastmodel'      => 'claude-sonnet-4-6',          // fix / solution modes
+    'maxtokens'      => 4096,
+    'verify_seeds'   => 3,                            // # seeds to test each draft
+    'verify_retries' => 2,                            // # self-correction passes
+    'max_libs'       => 3,                            // cap libraries loaded per request
+    'log'            => true,                         // store prompts/outputs for tuning
+    'min_rights'     => 20,                           // teacher gate (matches editor)
+    //'apiurl'       => '',                           // override endpoint for self-hosted
+    // Rollout is per-instructor: with neither of the next two set, no one sees the
+    // panel until an admin opts an instructor in. Set allowall=true to open it to
+    // every teacher, or list specific user ids in allowusers.
+    'allowall'       => false,
+    'allowusers'     => array(),                      // e.g. array(101, 245)
+  );
+  */
+
 	//use secure password hashing
 	$CFG['GEN']['newpasswords'] = 'only';
 

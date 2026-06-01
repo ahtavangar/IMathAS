@@ -1,174 +1,26 @@
 [
     {
-        "name": "JSXG",
-        "summary": "JSXGraph Integration functions, Version 1.0, September 2, 2016. Written by Grant Sander. Note: The jsxgraph macro library is an updated and more versitile version of these functions. This library prov…"
-    },
-    {
-        "name": "acct",
-        "summary": "A collection of accounting macros June 2013"
-    },
-    {
-        "name": "biology",
-        "summary": "A collection of biology helps. Currently in its beginning stages. Version 0.3 January 28, 2025"
-    },
-    {
-        "name": "calculus",
-        "summary": "A collection of numerical calculus routines. These are intended to do numerical calculations where they are specifically needed, not substitute for entering symbolic derivatives or integrals. Version…"
-    },
-    {
-        "name": "chemistry",
-        "summary": "A collection of chemistry routines Version 0.4 Jan 17 2025"
-    },
-    {
-        "name": "chgbase",
-        "summary": "A library of base changing functions. Version 1.1, Aug 2025. Version 1.0, Nov 13, 2007"
-    },
-    {
         "name": "complex",
         "summary": "Library name: complex Functions to handle operations for complex numbers.  Version 1.  October 2020 Author:  Amir Tavangar To import the library, include loadlibrary(\"complex\") in the question's co…"
-    },
-    {
-        "name": "construct2",
-        "summary": "Construct2 integration functions, Version 0.1, Dec 18, 2013"
-    },
-    {
-        "name": "conversion",
-        "summary": " Conversion - american, metric and between american and metric units  Mike Jenck, Originally developed Jan 29-31, 2021  licensed under GPL version 2 or later    File Version : 26.6"
-    },
-    {
-        "name": "crypto",
-        "summary": "Cryptography functions, Nov 2, 2012"
-    },
-    {
-        "name": "dates",
-        "summary": " A library of Date Functions. Version 1. Dec 17, 2020  Author: Daniel Brown: CU Boulder - Leeds School of Business"
-    },
-    {
-        "name": "diffeq",
-        "summary": "Differential equations functions, Jan 2023"
     },
     {
         "name": "finance2",
         "summary": "Financial Functions. Version 1. October 2020 Author: Amir Tavangar              Humber College, Toronto, ON To import the library, include loadlibrary(\"finance2\") in the common control. The fun…"
     },
     {
-        "name": "finderiv",
-        "summary": " A library of Financial Derivative Functions. Version 1.0 Dec 27, 2020  Author: Daniel Brown: CU Boulder - Leeds School of Business"
-    },
-    {
-        "name": "fractions",
-        "summary": "Fraction operations library"
-    },
-    {
-        "name": "functioneval",
-        "summary": "A smattering of macros for evaluating complicated functions. Version 1.0 Oct 4 2009"
-    },
-    {
-        "name": "geogebra",
-        "summary": "Geogebra integration functions, Version 3.0, Oct 4, 2014"
-    },
-    {
-        "name": "graphtheory",
-        "summary": "A library of graph theory and scheduling functions. Version 1.1, April 3, 2012 Most graphing functions in this library use an options array. Here are the common options - specific functions will menti…"
-    },
-    {
-        "name": "ineq",
-        "summary": "Inequality graphing functions. Version 1.0, Oct 30, 2006"
-    },
-    {
-        "name": "interval",
-        "summary": "Interval functions, Version 1.1 March 2, 2010"
-    },
-    {
-        "name": "interval_ext",
-        "summary": "Interval functions extension. Version 1.0 November 4, 2014"
-    },
-    {
         "name": "jsxgraph",
         "summary": "JSXGraph Integration functions - Version 1.2by David Flenner Written: October 14th, 2020 Last Updated: June, 2025 Adapted from JSXG library written by Grant Sander ## Introduction This library provide…"
-    },
-    {
-        "name": "lineutil",
-        "summary": "various line utility functions"
-    },
-    {
-        "name": "logic",
-        "summary": "Version 1.0: April 18, 2022 Created by Avery Flowers A collection of functions designed to aid in the creation of basic logic questions. Note: All variables used in these functions must be single alph…"
-    },
-    {
-        "name": "logistic",
-        "summary": "Logistic regression functions, Version 1, July 2019"
     },
     {
         "name": "matrix",
         "summary": "Matrix functions. Version 1.6, Jan 19 Contributors: David Lippman, Mike Jenck, Larry Green"
     },
     {
-        "name": "normalcurve",
-        "summary": "normal curve functions"
-    },
-    {
-        "name": "plot3d",
-        "summary": "Basic 3D graph display, HTML Canvas or Flash fallback. Also includes functions to embed or link to CalcPlot3D."
-    },
-    {
-        "name": "poly3",
-        "summary": "Polynomial Division Mike Jenck, Originally developed July 25-27, 2018 licensed under GPL version 2 or later File Version : 6"
-    },
-    {
-        "name": "polys",
-        "summary": "Polynomial functions. Version 1.2, Jan 7, 2026"
-    },
-    {
-        "name": "polys2",
-        "summary": "Polynomial functions with two variables, like 2x^2+3xy+4y^2. Version 1.0, Jan 21, 2010"
-    },
-    {
-        "name": "primes",
-        "summary": "Prime numbers, Version 1.0 Feb 11, 2009"
-    },
-    {
         "name": "radicals",
         "summary": "A collection of functions for working with radicals Last changed 10/7/24"
     },
     {
-        "name": "sagecell",
-        "summary": ""
-    },
-    {
-        "name": "setexp",
-        "summary": "Version 1.0: May 18, 2022 Created by Avery Flowers A collection of functions designed to aid in the creation of basic set questions. Note: All variables used in these functions must be single alphabet…"
-    },
-    {
         "name": "shapes",
         "summary": "Library name: shapes Functions to create and label basic shapes by using preexisting ASCIIsvg macro.  Version January 2022 By default, an image description is generated for each shape. To import the…"
-    },
-    {
-        "name": "simplex",
-        "summary": " Simplex method with mixed constraints solver  Mike Jenck, Originally developed May 16-26, 2014  licensed under GPL version 2 or later    File Version : 43"
-    },
-    {
-        "name": "socchoice",
-        "summary": "a collection of social choice routines Version 1.0 Sept 27, 2012"
-    },
-    {
-        "name": "solvers",
-        "summary": "Some solving algorithms. Version 1.1 March 25, 2014"
-    },
-    {
-        "name": "stats",
-        "summary": "A library of Stats functions. Version 1.30, Nov 20, 2021"
-    },
-    {
-        "name": "units",
-        "summary": "Contributed by Nick Chura Also check out the comparenumberswithunits function in the Conditional Test Macros section. ### parseunits(input) This function takes a string of a number with units, like \"1…"
-    },
-    {
-        "name": "vector",
-        "summary": "Vector functions. Version 1.0, April 4, 2006"
-    },
-    {
-        "name": "virtmanip",
-        "summary": "Virtual Manipulatives Functions for displaying and scoring virtual manipulatives. Some of these can be used an exploration/calculation aid in a question without being scored. Most have the ability to…"
     }
 ]

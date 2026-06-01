@@ -139,7 +139,7 @@
     'fastmodel'      => 'claude-sonnet-4-6',          // fix / solution modes
     'maxtokens'      => 4096,
     'verify_seeds'   => 3,                            // # seeds to test each draft
-    'verify_retries' => 2,                            // # self-correction passes
+    'verify_retries' => 1,                            // # self-correction passes (cost: each is a full model call)
     'max_libs'       => 3,                            // cap libraries loaded per request
     'log'            => true,                         // store prompts/outputs for tuning
     'min_rights'     => 20,                           // teacher gate (matches editor)

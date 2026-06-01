@@ -1135,42 +1135,43 @@ if ($olnames !== '') {
 </p>
 <?php if (aiUserAllowed()) { ?>
 <div id="aiassistbox" style="margin:6px 0;padding:8px;border:1px solid #ccc;border-radius:4px;background:#f7f7f9;">
+  <div style="margin-bottom:6px;">
+    <textarea id="aiGenPrompt" rows="2" style="width:99%" placeholder="<?php echo Sanitize::encodeStringForDisplay(_('Describe a question for the AI to generate, e.g. "a compound interest problem solving for principal"')); ?>"></textarea>
+  </div>
+  <button type="button" id="aiGenerateBtn" onclick="aiGenerate()"><?php echo _('AI: Generate'); ?></button>
   <button type="button" id="aiExplainFixBtn" onclick="aiExplainFix()"><?php echo _('AI: Explain / Fix'); ?></button>
-  <input type="text" id="aiFixPrompt" style="width:45%" placeholder="<?php echo Sanitize::encodeStringForDisplay(_('Optional: what should it check or fix?')); ?>">
+  <input type="text" id="aiFixPrompt" style="width:35%" placeholder="<?php echo Sanitize::encodeStringForDisplay(_('Optional: what should Explain/Fix check?')); ?>">
   <span id="aiStatus" class="noticetext"></span>
   <div id="aiResult" style="display:none;white-space:pre-wrap;margin-top:8px;padding:8px;background:#fff;border:1px solid #ddd;max-height:400px;overflow:auto;"></div>
 </div>
 <script type="text/javascript">
+function aiQGetVal(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+function aiQSetStatus(t) { var s = document.getElementById('aiStatus'); if (s) s.textContent = t; }
+
 function aiExplainFix() {
-    if (typeof tinyMCE !== 'undefined') { tinyMCE.triggerSave(); }
     var btn = document.getElementById('aiExplainFixBtn');
-    var status = document.getElementById('aiStatus');
     var resultBox = document.getElementById('aiResult');
-    function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
 
     var fd = new FormData();
     fd.append('mode', 'fix');
-    fd.append('qtype', val('qtype'));
-    fd.append('control', val('control'));
-    fd.append('answerbox', val('answerbox'));
-    fd.append('qtext', val('qtext'));
-    fd.append('solution', val('solution'));
-    fd.append('userprompt', val('aiFixPrompt'));
+    fd.append('qtype', aiQGetVal('qtype'));
+    fd.append('control', aiReadField('control'));
+    fd.append('qtext', aiReadField('qtext'));
+    fd.append('solution', aiReadField('solution'));
+    fd.append('userprompt', aiQGetVal('aiFixPrompt'));
 
     btn.disabled = true;
-    status.textContent = '<?php echo Sanitize::encodeStringForJavascript(_('Analyzing draft...')); ?>';
+    aiQSetStatus('<?php echo Sanitize::encodeStringForJavascript(_('Analyzing draft...')); ?>');
     resultBox.style.display = 'none';
     resultBox.textContent = '';
 
     fetch('<?php echo $imasroot; ?>/course/aiquestion.php?mode=fix', {
-        method: 'POST',
-        body: fd,
-        credentials: 'same-origin'
+        method: 'POST', body: fd, credentials: 'same-origin'
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
         btn.disabled = false;
-        status.textContent = '';
+        aiQSetStatus('');
         if (data && data.success) {
             resultBox.textContent = data.text;
             resultBox.style.display = 'block';
@@ -1180,9 +1181,122 @@ function aiExplainFix() {
     })
     .catch(function() {
         btn.disabled = false;
-        status.textContent = '';
+        aiQSetStatus('');
         alert('<?php echo Sanitize::encodeStringForJavascript(_('The AI request failed.')); ?>');
     });
+}
+
+function aiGenerate() {
+    var prompt = aiQGetVal('aiGenPrompt').trim();
+    if (prompt === '') {
+        alert('<?php echo Sanitize::encodeStringForJavascript(_('Please describe the question to generate first.')); ?>');
+        return;
+    }
+    var btn = document.getElementById('aiGenerateBtn');
+    var resultBox = document.getElementById('aiResult');
+
+    var fd = new FormData();
+    fd.append('mode', 'generate');
+    fd.append('userprompt', prompt);
+
+    btn.disabled = true;
+    aiQSetStatus('<?php echo Sanitize::encodeStringForJavascript(_('Generating and verifying (this can take a moment)...')); ?>');
+    resultBox.style.display = 'none';
+    resultBox.textContent = '';
+
+    fetch('<?php echo $imasroot; ?>/course/aiquestion.php?mode=generate', {
+        method: 'POST', body: fd, credentials: 'same-origin'
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        btn.disabled = false;
+        aiQSetStatus('');
+        if (!data || !data.success || !data.fields) {
+            alert((data && data.error) ? data.error : '<?php echo Sanitize::encodeStringForJavascript(_('The AI request failed.')); ?>');
+            return;
+        }
+        aiApplyGenerated(data);
+    })
+    .catch(function() {
+        btn.disabled = false;
+        aiQSetStatus('');
+        alert('<?php echo Sanitize::encodeStringForJavascript(_('The AI request failed.')); ?>');
+    });
+}
+
+// Read the current value of an editor field, accounting for CodeMirror / tinyMCE.
+function aiReadField(id) {
+    if (id === 'control' && typeof controlEditor !== 'undefined' && controlEditor) {
+        return controlEditor.getValue();
+    }
+    if (typeof tinyMCE !== 'undefined' && tinyMCE.get(id)) {
+        return tinyMCE.get(id).getContent();
+    }
+    if (typeof qEditor !== 'undefined' && qEditor[id]) {
+        return qEditor[id].getValue();
+    }
+    var el = document.getElementById(id);
+    return el ? el.value : '';
+}
+
+// Write a value into an editor field through whichever layer is active, so the
+// visible editor (not just the hidden textarea) updates.
+function aiWriteField(id, v) {
+    v = (v == null) ? '' : v;
+    var el = document.getElementById(id);
+    if (el) { el.value = v; }                       // keep the backing textarea in sync
+    if (id === 'control' && typeof controlEditor !== 'undefined' && controlEditor) {
+        controlEditor.setValue(v);
+        return;
+    }
+    if (typeof tinyMCE !== 'undefined' && tinyMCE.get(id)) {
+        tinyMCE.get(id).setContent(v);
+        return;
+    }
+    if (typeof qEditor !== 'undefined' && qEditor[id]) {
+        qEditor[id].setValue(v);
+    }
+}
+
+// Fill the editor fields, confirming before overwriting any non-empty field.
+function aiApplyGenerated(data) {
+    var f = data.fields;
+    var targets = [['description', f.description], ['control', f.control], ['qtext', f.qtext], ['solution', f.solution]];
+    // The default new-question description is a placeholder; don't treat it as real content.
+    var descPlaceholder = '<?php echo Sanitize::encodeStringForJavascript(_('Enter description here')); ?>';
+    var hasExisting = targets.some(function(t) {
+        var cur = aiReadField(t[0]).trim();
+        if (t[0] === 'description' && cur === descPlaceholder) { return false; }
+        return cur !== '';
+    });
+    if (hasExisting && !confirm('<?php echo Sanitize::encodeStringForJavascript(_('This will overwrite the current Description, Common Control, Question Text, and Detailed Solution with the generated question. Continue?')); ?>')) {
+        return;
+    }
+
+    var qt = document.getElementById('qtype');
+    if (qt && f.qtype) {
+        qt.value = f.qtype;
+        // Update the visible qtype dropdown label/selection if available.
+        if (typeof selectqtype === 'function') { try { selectqtype(f.qtype); } catch (e) {} }
+    }
+
+    targets.forEach(function(t) { aiWriteField(t[0], t[1]); });
+
+    // Show status + notes + any residual warnings.
+    var resultBox = document.getElementById('aiResult');
+    var lines = [];
+    if (data.status) { lines.push(data.status); }
+    if (data.reasoning) { lines.push('<?php echo Sanitize::encodeStringForJavascript(_('Routing:')); ?> ' + data.reasoning); }
+    if (data.notes) { lines.push('<?php echo Sanitize::encodeStringForJavascript(_('Notes:')); ?> ' + data.notes); }
+    if (!data.verified && data.errors && data.errors.length) {
+        lines.push('<?php echo Sanitize::encodeStringForJavascript(_('Unresolved warnings:')); ?>');
+        data.errors.forEach(function(e) { lines.push('  - ' + e); });
+    }
+    resultBox.textContent = lines.join('\n');
+    resultBox.style.display = 'block';
+    aiQSetStatus(data.verified
+        ? '<?php echo Sanitize::encodeStringForJavascript(_('Filled. Review, then Save and Test.')); ?>'
+        : '<?php echo Sanitize::encodeStringForJavascript(_('Filled with warnings — review before saving.')); ?>');
 }
 </script>
 <?php } ?>

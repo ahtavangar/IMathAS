@@ -70,30 +70,43 @@ function aiCleanHelpHtml($html) {
 }
 
 /**
+ * Macro libraries the AI assistant is ALLOWED to load. Core libraries are always
+ * available (never need loadlibrary) and are covered by the core reference; this
+ * is the curated set of *loadable* libraries the router may select. Kept small to
+ * control prompt size/cost and steer the model toward well-supported domains.
+ * To offer more, add the library name here (it must exist in assessment/libs/).
+ */
+function aiAllowedLibraries() {
+    return array('matrix', 'radicals', 'shapes', 'jsxgraph', 'finance2', 'complex');
+}
+
+/**
  * Macro libraries the AI assistant must NOT use, even though they exist on disk.
  * Superseded/deprecated libraries go here so the router never selects them.
  *   finance — superseded by finance2; use finance2 only.
+ * (The allowlist already restricts selection; this is a belt-and-suspenders guard.)
  */
 function aiExcludedLibraries() {
     return array('finance');
 }
 
 /**
- * The real set of installed macro libraries, derived from the help files on disk,
- * minus any excluded (deprecated/superseded) ones. Used to validate any name the
- * router (or recovery path) hands us. Cached per request. Returns a list of names
- * like ['finance2', 'stats', ...].
+ * The set of macro libraries the assistant may use: the curated allowlist,
+ * intersected with what's actually installed on disk (has a backing .php), minus
+ * any excluded ones. Used to validate any name the router/recovery hands us, and
+ * to build the manifest. Cached per request.
  */
 function aiKnownLibraries() {
     static $libs = null;
     if ($libs !== null) { return $libs; }
     $excluded = aiExcludedLibraries();
+    $allowed  = aiAllowedLibraries();
     $libs = array();
-    foreach (glob(aiLibsDir() . '/*.html') as $path) {
-        $name = basename($path, '.html');
+    foreach ($allowed as $name) {
         if (in_array($name, $excluded, true)) { continue; }
-        // Only count libraries that have a backing .php (matches libhelp.php).
-        if (file_exists(aiLibsDir() . '/' . $name . '.php')) {
+        // Must exist as a real library (html + backing php), matching libhelp.php.
+        if (is_readable(aiLibsDir() . '/' . $name . '.html') &&
+            file_exists(aiLibsDir() . '/' . $name . '.php')) {
             $libs[] = $name;
         }
     }
